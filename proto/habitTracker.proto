@@ -52,6 +52,6 @@ message UserHabits{
     repeated Habit habbits = 1;
 }
 
-message Habits{
+message Habbits{
     repeated HabitLog habbits = 1;
 }
