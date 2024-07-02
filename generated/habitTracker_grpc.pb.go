@@ -19,20 +19,20 @@ import (
 const _ = grpc.SupportPackageIsVersion8
 
 const (
-	HabbitTracker_CreateHabit_FullMethodName         = "/habbitTracker.HabbitTracker/CreateHabit"
-	HabbitTracker_GetHabit_FullMethodName            = "/habbitTracker.HabbitTracker/GetHabit"
-	HabbitTracker_UpdateHabit_FullMethodName         = "/habbitTracker.HabbitTracker/UpdateHabit"
-	HabbitTracker_DeleteHabit_FullMethodName         = "/habbitTracker.HabbitTracker/DeleteHabit"
-	HabbitTracker_GetUserHabits_FullMethodName       = "/habbitTracker.HabbitTracker/GetUserHabits"
-	HabbitTracker_CreateHabitLog_FullMethodName      = "/habbitTracker.HabbitTracker/CreateHabitLog"
-	HabbitTracker_GetHabitLogs_FullMethodName        = "/habbitTracker.HabbitTracker/GetHabitLogs"
-	HabbitTracker_GetHabitSuggestions_FullMethodName = "/habbitTracker.HabbitTracker/GetHabitSuggestions"
+	HabitTracker_CreateHabit_FullMethodName         = "/habbitTracker.HabitTracker/CreateHabit"
+	HabitTracker_GetHabit_FullMethodName            = "/habbitTracker.HabitTracker/GetHabit"
+	HabitTracker_UpdateHabit_FullMethodName         = "/habbitTracker.HabitTracker/UpdateHabit"
+	HabitTracker_DeleteHabit_FullMethodName         = "/habbitTracker.HabitTracker/DeleteHabit"
+	HabitTracker_GetUserHabits_FullMethodName       = "/habbitTracker.HabitTracker/GetUserHabits"
+	HabitTracker_CreateHabitLog_FullMethodName      = "/habbitTracker.HabitTracker/CreateHabitLog"
+	HabitTracker_GetHabitLogs_FullMethodName        = "/habbitTracker.HabitTracker/GetHabitLogs"
+	HabitTracker_GetHabitSuggestions_FullMethodName = "/habbitTracker.HabitTracker/GetHabitSuggestions"
 )
 
-// HabbitTrackerClient is the client API for HabbitTracker service.
+// HabitTrackerClient is the client API for HabitTracker service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type HabbitTrackerClient interface {
+type HabitTrackerClient interface {
 	CreateHabit(ctx context.Context, in *Habit, opts ...grpc.CallOption) (*Status, error)
 	GetHabit(ctx context.Context, in *HabitId, opts ...grpc.CallOption) (*Habit, error)
 	UpdateHabit(ctx context.Context, in *Habit, opts ...grpc.CallOption) (*Status, error)
@@ -40,101 +40,101 @@ type HabbitTrackerClient interface {
 	GetUserHabits(ctx context.Context, in *UserId, opts ...grpc.CallOption) (*Habit, error)
 	CreateHabitLog(ctx context.Context, in *HabitLog, opts ...grpc.CallOption) (*Status, error)
 	GetHabitLogs(ctx context.Context, in *HabitId, opts ...grpc.CallOption) (*HabitLog, error)
-	GetHabitSuggestions(ctx context.Context, in *Req, opts ...grpc.CallOption) (*Habbits, error)
+	GetHabitSuggestions(ctx context.Context, in *Req, opts ...grpc.CallOption) (*Habits, error)
 }
 
-type habbitTrackerClient struct {
+type habitTrackerClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewHabbitTrackerClient(cc grpc.ClientConnInterface) HabbitTrackerClient {
-	return &habbitTrackerClient{cc}
+func NewHabitTrackerClient(cc grpc.ClientConnInterface) HabitTrackerClient {
+	return &habitTrackerClient{cc}
 }
 
-func (c *habbitTrackerClient) CreateHabit(ctx context.Context, in *Habit, opts ...grpc.CallOption) (*Status, error) {
+func (c *habitTrackerClient) CreateHabit(ctx context.Context, in *Habit, opts ...grpc.CallOption) (*Status, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Status)
-	err := c.cc.Invoke(ctx, HabbitTracker_CreateHabit_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, HabitTracker_CreateHabit_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *habbitTrackerClient) GetHabit(ctx context.Context, in *HabitId, opts ...grpc.CallOption) (*Habit, error) {
+func (c *habitTrackerClient) GetHabit(ctx context.Context, in *HabitId, opts ...grpc.CallOption) (*Habit, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Habit)
-	err := c.cc.Invoke(ctx, HabbitTracker_GetHabit_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, HabitTracker_GetHabit_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *habbitTrackerClient) UpdateHabit(ctx context.Context, in *Habit, opts ...grpc.CallOption) (*Status, error) {
+func (c *habitTrackerClient) UpdateHabit(ctx context.Context, in *Habit, opts ...grpc.CallOption) (*Status, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Status)
-	err := c.cc.Invoke(ctx, HabbitTracker_UpdateHabit_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, HabitTracker_UpdateHabit_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *habbitTrackerClient) DeleteHabit(ctx context.Context, in *HabitId, opts ...grpc.CallOption) (*Status, error) {
+func (c *habitTrackerClient) DeleteHabit(ctx context.Context, in *HabitId, opts ...grpc.CallOption) (*Status, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Status)
-	err := c.cc.Invoke(ctx, HabbitTracker_DeleteHabit_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, HabitTracker_DeleteHabit_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *habbitTrackerClient) GetUserHabits(ctx context.Context, in *UserId, opts ...grpc.CallOption) (*Habit, error) {
+func (c *habitTrackerClient) GetUserHabits(ctx context.Context, in *UserId, opts ...grpc.CallOption) (*Habit, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Habit)
-	err := c.cc.Invoke(ctx, HabbitTracker_GetUserHabits_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, HabitTracker_GetUserHabits_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *habbitTrackerClient) CreateHabitLog(ctx context.Context, in *HabitLog, opts ...grpc.CallOption) (*Status, error) {
+func (c *habitTrackerClient) CreateHabitLog(ctx context.Context, in *HabitLog, opts ...grpc.CallOption) (*Status, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Status)
-	err := c.cc.Invoke(ctx, HabbitTracker_CreateHabitLog_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, HabitTracker_CreateHabitLog_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *habbitTrackerClient) GetHabitLogs(ctx context.Context, in *HabitId, opts ...grpc.CallOption) (*HabitLog, error) {
+func (c *habitTrackerClient) GetHabitLogs(ctx context.Context, in *HabitId, opts ...grpc.CallOption) (*HabitLog, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(HabitLog)
-	err := c.cc.Invoke(ctx, HabbitTracker_GetHabitLogs_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, HabitTracker_GetHabitLogs_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *habbitTrackerClient) GetHabitSuggestions(ctx context.Context, in *Req, opts ...grpc.CallOption) (*Habbits, error) {
+func (c *habitTrackerClient) GetHabitSuggestions(ctx context.Context, in *Req, opts ...grpc.CallOption) (*Habits, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Habbits)
-	err := c.cc.Invoke(ctx, HabbitTracker_GetHabitSuggestions_FullMethodName, in, out, cOpts...)
+	out := new(Habits)
+	err := c.cc.Invoke(ctx, HabitTracker_GetHabitSuggestions_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// HabbitTrackerServer is the server API for HabbitTracker service.
-// All implementations must embed UnimplementedHabbitTrackerServer
+// HabitTrackerServer is the server API for HabitTracker service.
+// All implementations must embed UnimplementedHabitTrackerServer
 // for forward compatibility
-type HabbitTrackerServer interface {
+type HabitTrackerServer interface {
 	CreateHabit(context.Context, *Habit) (*Status, error)
 	GetHabit(context.Context, *HabitId) (*Habit, error)
 	UpdateHabit(context.Context, *Habit) (*Status, error)
@@ -146,229 +146,229 @@ type HabbitTrackerServer interface {
 	mustEmbedUnimplementedHabbitTrackerServer()
 }
 
-// UnimplementedHabbitTrackerServer must be embedded to have forward compatible implementations.
-type UnimplementedHabbitTrackerServer struct {
+// UnimplementedHabitTrackerServer must be embedded to have forward compatible implementations.
+type UnimplementedHabitTrackerServer struct {
 }
 
-func (UnimplementedHabbitTrackerServer) CreateHabit(context.Context, *Habit) (*Status, error) {
+func (UnimplementedHabitTrackerServer) CreateHabit(context.Context, *Habit) (*Status, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateHabit not implemented")
 }
-func (UnimplementedHabbitTrackerServer) GetHabit(context.Context, *HabitId) (*Habit, error) {
+func (UnimplementedHabitTrackerServer) GetHabit(context.Context, *HabitId) (*Habit, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetHabit not implemented")
 }
-func (UnimplementedHabbitTrackerServer) UpdateHabit(context.Context, *Habit) (*Status, error) {
+func (UnimplementedHabitTrackerServer) UpdateHabit(context.Context, *Habit) (*Status, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateHabit not implemented")
 }
-func (UnimplementedHabbitTrackerServer) DeleteHabit(context.Context, *HabitId) (*Status, error) {
+func (UnimplementedHabitTrackerServer) DeleteHabit(context.Context, *HabitId) (*Status, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteHabit not implemented")
 }
-func (UnimplementedHabbitTrackerServer) GetUserHabits(context.Context, *UserId) (*Habit, error) {
+func (UnimplementedHabitTrackerServer) GetUserHabits(context.Context, *UserId) (*Habit, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserHabits not implemented")
 }
-func (UnimplementedHabbitTrackerServer) CreateHabitLog(context.Context, *HabitLog) (*Status, error) {
+func (UnimplementedHabitTrackerServer) CreateHabitLog(context.Context, *HabitLog) (*Status, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateHabitLog not implemented")
 }
-func (UnimplementedHabbitTrackerServer) GetHabitLogs(context.Context, *HabitId) (*HabitLog, error) {
+func (UnimplementedHabitTrackerServer) GetHabitLogs(context.Context, *HabitId) (*HabitLog, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetHabitLogs not implemented")
 }
-func (UnimplementedHabbitTrackerServer) GetHabitSuggestions(context.Context, *Req) (*Habbits, error) {
+func (UnimplementedHabitTrackerServer) GetHabitSuggestions(context.Context, *Req) (*Habits, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetHabitSuggestions not implemented")
 }
-func (UnimplementedHabbitTrackerServer) mustEmbedUnimplementedHabbitTrackerServer() {}
+func (UnimplementedHabitTrackerServer) mustEmbedUnimplementedHabitTrackerServer() {}
 
-// UnsafeHabbitTrackerServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to HabbitTrackerServer will
+// UnsafeHabitTrackerServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to HabitTrackerServer will
 // result in compilation errors.
-type UnsafeHabbitTrackerServer interface {
-	mustEmbedUnimplementedHabbitTrackerServer()
+type UnsafeHabitTrackerServer interface {
+	mustEmbedUnimplementedHabitTrackerServer()
 }
 
-func RegisterHabbitTrackerServer(s grpc.ServiceRegistrar, srv HabbitTrackerServer) {
-	s.RegisterService(&HabbitTracker_ServiceDesc, srv)
+func RegisterHabitTrackerServer(s grpc.ServiceRegistrar, srv HabitTrackerServer) {
+	s.RegisterService(&HabitTracker_ServiceDesc, srv)
 }
 
-func _HabbitTracker_CreateHabit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _HabitTracker_CreateHabit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Habit)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(HabbitTrackerServer).CreateHabit(ctx, in)
+		return srv.(HabitTrackerServer).CreateHabit(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: HabbitTracker_CreateHabit_FullMethodName,
+		FullMethod: HabitTracker_CreateHabit_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(HabbitTrackerServer).CreateHabit(ctx, req.(*Habit))
+		return srv.(HabitTrackerServer).CreateHabit(ctx, req.(*Habit))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _HabbitTracker_GetHabit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _HabitTracker_GetHabit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(HabitId)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(HabbitTrackerServer).GetHabit(ctx, in)
+		return srv.(HabitTrackerServer).GetHabit(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: HabbitTracker_GetHabit_FullMethodName,
+		FullMethod: HabitTracker_GetHabit_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(HabbitTrackerServer).GetHabit(ctx, req.(*HabitId))
+		return srv.(HabitTrackerServer).GetHabit(ctx, req.(*HabitId))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _HabbitTracker_UpdateHabit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _HabitTracker_UpdateHabit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Habit)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(HabbitTrackerServer).UpdateHabit(ctx, in)
+		return srv.(HabitTrackerServer).UpdateHabit(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: HabbitTracker_UpdateHabit_FullMethodName,
+		FullMethod: HabitTracker_UpdateHabit_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(HabbitTrackerServer).UpdateHabit(ctx, req.(*Habit))
+		return srv.(HabitTrackerServer).UpdateHabit(ctx, req.(*Habit))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _HabbitTracker_DeleteHabit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _HabitTracker_DeleteHabit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(HabitId)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(HabbitTrackerServer).DeleteHabit(ctx, in)
+		return srv.(HabitTrackerServer).DeleteHabit(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: HabbitTracker_DeleteHabit_FullMethodName,
+		FullMethod: HabitTracker_DeleteHabit_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(HabbitTrackerServer).DeleteHabit(ctx, req.(*HabitId))
+		return srv.(HabitTrackerServer).DeleteHabit(ctx, req.(*HabitId))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _HabbitTracker_GetUserHabits_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _HabitTracker_GetUserHabits_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UserId)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(HabbitTrackerServer).GetUserHabits(ctx, in)
+		return srv.(HabitTrackerServer).GetUserHabits(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: HabbitTracker_GetUserHabits_FullMethodName,
+		FullMethod: HabitTracker_GetUserHabits_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(HabbitTrackerServer).GetUserHabits(ctx, req.(*UserId))
+		return srv.(HabitTrackerServer).GetUserHabits(ctx, req.(*UserId))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _HabbitTracker_CreateHabitLog_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _HabitTracker_CreateHabitLog_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(HabitLog)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(HabbitTrackerServer).CreateHabitLog(ctx, in)
+		return srv.(HabitTrackerServer).CreateHabitLog(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: HabbitTracker_CreateHabitLog_FullMethodName,
+		FullMethod: HabitTracker_CreateHabitLog_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(HabbitTrackerServer).CreateHabitLog(ctx, req.(*HabitLog))
+		return srv.(HabitTrackerServer).CreateHabitLog(ctx, req.(*HabitLog))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _HabbitTracker_GetHabitLogs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _HabitTracker_GetHabitLogs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(HabitId)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(HabbitTrackerServer).GetHabitLogs(ctx, in)
+		return srv.(HabitTrackerServer).GetHabitLogs(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: HabbitTracker_GetHabitLogs_FullMethodName,
+		FullMethod: HabitTracker_GetHabitLogs_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(HabbitTrackerServer).GetHabitLogs(ctx, req.(*HabitId))
+		return srv.(HabitTrackerServer).GetHabitLogs(ctx, req.(*HabitId))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _HabbitTracker_GetHabitSuggestions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _HabitTracker_GetHabitSuggestions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Req)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(HabbitTrackerServer).GetHabitSuggestions(ctx, in)
+		return srv.(HabitTrackerServer).GetHabitSuggestions(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: HabbitTracker_GetHabitSuggestions_FullMethodName,
+		FullMethod: HabitTracker_GetHabitSuggestions_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(HabbitTrackerServer).GetHabitSuggestions(ctx, req.(*Req))
+		return srv.(HabitTrackerServer).GetHabitSuggestions(ctx, req.(*Req))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// HabbitTracker_ServiceDesc is the grpc.ServiceDesc for HabbitTracker service.
+// HabitTracker_ServiceDesc is the grpc.ServiceDesc for HabitTracker service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var HabbitTracker_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "habbitTracker.HabbitTracker",
-	HandlerType: (*HabbitTrackerServer)(nil),
+var HabitTracker_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "habbitTracker.HabitTracker",
+	HandlerType: (*HabitTrackerServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "CreateHabit",
-			Handler:    _HabbitTracker_CreateHabit_Handler,
+			Handler:    _HabitTracker_CreateHabit_Handler,
 		},
 		{
 			MethodName: "GetHabit",
-			Handler:    _HabbitTracker_GetHabit_Handler,
+			Handler:    _HabitTracker_GetHabit_Handler,
 		},
 		{
 			MethodName: "UpdateHabit",
-			Handler:    _HabbitTracker_UpdateHabit_Handler,
+			Handler:    _HabitTracker_UpdateHabit_Handler,
 		},
 		{
 			MethodName: "DeleteHabit",
-			Handler:    _HabbitTracker_DeleteHabit_Handler,
+			Handler:    _HabitTracker_DeleteHabit_Handler,
 		},
 		{
 			MethodName: "GetUserHabits",
-			Handler:    _HabbitTracker_GetUserHabits_Handler,
+			Handler:    _HabitTracker_GetUserHabits_Handler,
 		},
 		{
 			MethodName: "CreateHabitLog",
-			Handler:    _HabbitTracker_CreateHabitLog_Handler,
+			Handler:    _HabitTracker_CreateHabitLog_Handler,
 		},
 		{
 			MethodName: "GetHabitLogs",
-			Handler:    _HabbitTracker_GetHabitLogs_Handler,
+			Handler:    _HabitTracker_GetHabitLogs_Handler,
 		},
 		{
 			MethodName: "GetHabitSuggestions",
-			Handler:    _HabbitTracker_GetHabitSuggestions_Handler,
+			Handler:    _HabitTracker_GetHabitSuggestions_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
