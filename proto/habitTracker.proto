@@ -6,23 +6,23 @@ package habbitTracker;
 
 
 service HabbitTracker{
-    rpc CreateHabit(Habbit) returns(Status){}
-    rpc GetHabit(HabbitId) returns(Habbit){}
-    rpc UpdateHabit(Habbit) returns(Status){}
-    rpc DeleteHabit(HabbitId) returns(Status){}
-    rpc GetUserHabits(UserId) returns(Habbit){}
-    rpc CreateHabitLog(HabbitLog) returns(Status){}
-    rpc GetHabitLogs(HabbitId) returns(HabbitLog){}
-    rpc GetHabitSuggestions(Req) returns(Habbits){}
+    rpc CreateHabit(Habit) returns(Status){}
+    rpc GetHabit(HabitId) returns(Habit){}
+    rpc UpdateHabit(Habit) returns(Status){}
+    rpc DeleteHabit(HabitId) returns(Status){}
+    rpc GetUserHabits(UserId) returns(Habit){}
+    rpc CreateHabitLog(HabitLog) returns(Status){}
+    rpc GetHabitLogs(HabitId) returns(HabitLog){}
+    rpc GetHabitSuggestions(Req) returns(Habits){}
 }
 
 
-message HabbitId{
-    string HabbitId = 1;
+message HabitId{
+    string HabitId = 1;
 }
 
-message Habbit{
-    string habbit_id = 1;
+message Habit{
+    string habitId = 1;
     string user_id = 2;
     string name = 3;
     string discription = 4;
@@ -30,9 +30,9 @@ message Habbit{
     string createdAt = 6;
 }
 
-message HabbitLog{
+message HabitLog{
     string id = 1;
-    string habbitId = 2;
+    string habitId = 2;
     string loggedAt = 3;
     string notes = 4;
 }
@@ -48,6 +48,6 @@ message UserId{
 
 message Req{}
 
-message Habbits{
-    repeated HabbitLog habbits = 1;
+message Habits{
+    repeated HabitLog habits = 1;
 }

@@ -1,0 +1,112 @@
+package postgres
+
+import (
+	"database/sql"
+	"fmt"
+	pb "mymode/generated"
+	"strconv"
+	"strings"
+	"time"
+)
+
+type HabitTrackerRepo struct {
+	DB *sql.DB
+}
+
+func NewHabitTrackerRepo(db *sql.DB) *HabitTrackerRepo {
+	return &HabitTrackerRepo{DB: db}
+}
+
+func (H *HabitTrackerRepo) CreateHabit(habit *pb.Habit) (*pb.Status, error) {
+	_, err := H.DB.Exec("INSERT INTO Habits(user_id,name,discription,frequency) VALUES($1,$2,$3,$4)", habit.UserId, habit.Name, habit.Discription, habit.Frequency)
+
+	if err != nil {
+		return &pb.Status{
+			Status: false,
+		}, err
+	}
+
+	return &pb.Status{
+		Status: true,
+	}, nil
+}
+
+func (H *HabitTrackerRepo) GetHabit(habbitId *pb.HabitId) (*pb.Habit, error) {
+	habbit := pb.Habit{}
+	err := H.DB.QueryRow("SELECT * FROM Habits WHERE habit_id = $1", habbitId.HabitId).Scan(
+		&habbit.HabitId, &habbit.UserId, &habbit.Name, &habbit.Discription, &habbit.Frequency)
+	if err != nil {
+		return nil, err
+	}
+	return &habbit, nil
+}
+
+func (H *HabitTrackerRepo) UpdateHabit(habit *pb.Habit) (*pb.Status, error) {
+	time := time.Now()
+	query := "UPDATE Habits SET update_at = $1 "
+	arr := []interface{}{time}
+	var param []string
+
+	if len(habit.UserId) > 0 {
+		arr = append(arr, habit.UserId)
+		param = append(param, "user_id")
+		query += ", user_id = :user_id "
+	}
+
+	if len(habit.Name) > 0 {
+		arr = append(arr, habit.Name)
+		param = append(param, "name")
+		query += ", name = :name"
+	}
+
+	if len(habit.Discription) > 0 {
+		arr = append(arr, habit.Discription)
+		param = append(param, "discription")
+		query += ", discription = :discription"
+	}
+
+	n := 2
+	for _, j := range param {
+		query = strings.Replace(query, ":"+j, "$"+strconv.Itoa(n), 1)
+		n++
+	}
+	query += fmt.Sprintf(" WHERE deleted_at is null and habit_id = $%d", n)
+	arr = append(arr, habit.HabitId)
+	_, err := H.DB.Exec(query, arr...)
+	if err != nil {
+		return &pb.Status{Status: false}, err
+	}
+	return &pb.Status{Status: true}, nil
+}
+
+func (H *HabitTrackerRepo)DeleteHabit(habitId *pb.HabitId)(*pb.Status,error){
+	_,err := H.DB.Exec("DELETE FROM Habits WHERE habit_id = $1",habitId.HabitId)
+	if err != nil{
+		return &pb.Status{
+			Status: false,
+		},err
+	}
+	return &pb.Status{
+		Status: true,
+	},err
+}
+
+
+
+func (H *HabitTrackerRepo)GetHabitSuggestions(request *pb.Req)(*pb.Habits,error){
+	rows,err := H.DB.Query("SELECT * FROM Habit_logs")
+	if err != nil{
+		return nil,err
+	}
+
+	habits := pb.Habits{}
+	for rows.Next(){
+		habitLog := pb.HabitLog{}
+		err = rows.Scan(&habitLog.Id,&habitLog.HabitId,&habitLog.LoggedAt,&habitLog.Notes)
+		if err != nil{
+			return nil,err
+		}
+		habits.Habits = append(habits.Habits, &habitLog)
+	}
+	return &habits,nil
+}
