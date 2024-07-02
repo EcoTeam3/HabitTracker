@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+option go_package = "/generated";
+
+package habbitTracker;
+
+
+service HabbitTracker{
+    rpc CreateHabit(Habbit) returns(Status){}
+    rpc GetHabit(HabbitId) returns(Habbit){}
+    rpc UpdateHabit(Habbit) returns(Status){}
+    rpc DeleteHabit(HabbitId) returns(Status){}
+    rpc GetUserHabits(UserId) returns(Habbit){}
+    rpc CreateHabitLog(HabbitLog) returns(Status){}
+    rpc GetHabitLogs(HabbitId) returns(HabbitLog){}
+    rpc GetHabitSuggestions(Req) returns(Habbits){}
+}
+
+
+message HabbitId{
+    string HabbitId = 1;
+}
+
+message Habbit{
+    string habbit_id = 1;
+    string user_id = 2;
+    string name = 3;
+    string discription = 4;
+    string frequency = 5;
+    string createdAt = 6;
+}
+
+message HabbitLog{
+    string id = 1;
+    string habbitId = 2;
+    string loggedAt = 3;
+    string notes = 4;
+}
+
+
+message Status{
+    bool status = 1;
+}
+
+message UserId{
+    string userId = 1;
+}
+
+message Req{}
+
+message Habbits{
+    repeated HabbitLog habbits = 1;
+}
