@@ -5,6 +5,7 @@ option go_package = "/generated";
 package habbitTracker;
 
 
+
 service HabitTracker{
     rpc CreateHabit(Habit) returns(Status){}
     rpc GetHabit(HabitId) returns(Habit){}
@@ -18,11 +19,11 @@ service HabitTracker{
 
 
 message HabitId{
-    string HabbitId = 1;
+    string HabitId = 1;
 }
 
 message Habit{
-    string habbitId = 1;
+    string habitId = 1;
     string userId = 2;
     string name = 3;
     string discription = 4;
@@ -32,7 +33,7 @@ message Habit{
 
 message HabitLog{
     string id = 1;
-    string habbitId = 2;
+    string habitId = 2;
     string loggedAt = 3;
     string notes = 4;
 }
@@ -48,10 +49,10 @@ message UserId{
 
 message Req{}
 
+message Habits{
+    repeated HabitLog habits = 1;
+}
 message UserHabits{
     repeated Habit habbits = 1;
 }
 
-message Habbits{
-    repeated HabitLog habbits = 1;
-}
