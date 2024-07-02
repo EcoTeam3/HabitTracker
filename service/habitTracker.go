@@ -15,7 +15,7 @@ func NewHabitTracker(h postgres.HabitTrackerRepo) *Server {
 	return &Server{H: h}
 }
 
-func (S *Server) CreateHabit(ctx context.Context, habit *pb.Habbit) (*pb.Status, error) {
+func (S *Server) CreateHabit(ctx context.Context, habit *pb.Habit) (*pb.Status, error) {
 	status, err := S.H.CreateHabit(habit)
 	if err != nil {
 		return nil, err
@@ -23,7 +23,7 @@ func (S *Server) CreateHabit(ctx context.Context, habit *pb.Habbit) (*pb.Status,
 	return status, err
 }
 
-func (S *Server) GetHabit(ctx context.Context, habitId *pb.HabbitId) (*pb.Habbit, error) {
+func (S *Server) GetHabit(ctx context.Context, habitId *pb.HabitId) (*pb.Habit, error) {
 	habit, err := S.H.GetHabit(habitId)
 	if err != nil {
 		return nil, err
@@ -31,7 +31,7 @@ func (S *Server) GetHabit(ctx context.Context, habitId *pb.HabbitId) (*pb.Habbit
 	return habit, nil
 }
 
-func (S *Server) UpdateHabit(ctx context.Context, habit *pb.Habbit) (*pb.Status, error) {
+func (S *Server) UpdateHabit(ctx context.Context, habit *pb.Habit) (*pb.Status, error) {
 	status, err := S.H.UpdateHabit(habit)
 	if err != nil {
 		return nil, err
@@ -39,7 +39,7 @@ func (S *Server) UpdateHabit(ctx context.Context, habit *pb.Habbit) (*pb.Status,
 	return status, nil
 }
 
-func (S *Server) DeleteHabit(ctx context.Context, habitId *pb.HabbitId) (*pb.Status, error) {
+func (S *Server) DeleteHabit(ctx context.Context, habitId *pb.HabitId) (*pb.Status, error) {
 	status, err := S.H.DeleteHabit(habitId)
 	if err != nil {
 		return nil, err
@@ -47,7 +47,7 @@ func (S *Server) DeleteHabit(ctx context.Context, habitId *pb.HabbitId) (*pb.Sta
 	return status, nil
 }
 
-func (S *Server) GetUserHabits(ctx context.Context, userID *pb.UserId) (*pb.Habbit, error) {
+func (S *Server) GetUserHabits(ctx context.Context, userID *pb.UserId) (*pb.Habit, error) {
 	habit, err := S.H.GetUserHabits(userID)
 	if err != nil {
 		return nil, err
@@ -55,7 +55,7 @@ func (S *Server) GetUserHabits(ctx context.Context, userID *pb.UserId) (*pb.Habb
 	return habit, nil
 }
 
-func (S *Server) CreateHabitLog(ctx context.Context, habitlog *pb.HabbitLog) (*pb.Status, error) {
+func (S *Server) CreateHabitLog(ctx context.Context, habitlog *pb.HabitLog) (*pb.Status, error) {
 	status, err := S.H.CreateHabitLog(habitlog)
 	if err != nil {
 		return nil, err
@@ -63,7 +63,7 @@ func (S *Server) CreateHabitLog(ctx context.Context, habitlog *pb.HabbitLog) (*p
 	return status, err
 }
 
-func (S *Server) GetHabitLogs(ctx context.Context, habitId *pb.HabbitId) (*pb.HabbitLog, error) {
+func (S *Server) GetHabitLogs(ctx context.Context, habitId *pb.HabitId) (*pb.HabitLog, error) {
 	habit, err := S.H.GetHabitLogs(habitId)
 	if err != nil {
 		return nil, err
@@ -71,7 +71,7 @@ func (S *Server) GetHabitLogs(ctx context.Context, habitId *pb.HabbitId) (*pb.Ha
 	return habit, nil
 }
 
-func (S *Server) GetHabitSuggestions(ctx context.Context, req *pb.Req) (*pb.Habbits, error) {
+func (S *Server) GetHabitSuggestions(ctx context.Context, req *pb.Req) (*pb.Habits, error) {
 	habits, err := S.H.GetHabitSuggestions(req)
 	if err != nil {
 		return nil, err
