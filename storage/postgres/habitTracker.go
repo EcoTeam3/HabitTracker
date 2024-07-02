@@ -35,8 +35,8 @@ func (H *HabitTrackerRepo) GetHabit(habbitId *pb.HabitId) (*pb.Habit, error) {
 	habbit := pb.Habit{}
 	err := H.DB.QueryRow("SELECT * FROM Habits WHERE habit_id = $1", habbitId.HabitId).Scan(
 		&habbit.HabitId, &habbit.UserId, &habbit.Name, &habbit.Discription, &habbit.Frequency)
-	if err != nil {
-		return nil, err
+		if err != nil {
+			return nil, err
 	}
 	return &habbit, nil
 }
@@ -52,19 +52,19 @@ func (H *HabitTrackerRepo) UpdateHabit(habit *pb.Habit) (*pb.Status, error) {
 		param = append(param, "user_id")
 		query += ", user_id = :user_id "
 	}
-
+	
 	if len(habit.Name) > 0 {
 		arr = append(arr, habit.Name)
 		param = append(param, "name")
 		query += ", name = :name"
 	}
-
+	
 	if len(habit.Discription) > 0 {
 		arr = append(arr, habit.Discription)
 		param = append(param, "discription")
 		query += ", discription = :discription"
 	}
-
+	
 	n := 2
 	for _, j := range param {
 		query = strings.Replace(query, ":"+j, "$"+strconv.Itoa(n), 1)
@@ -74,19 +74,30 @@ func (H *HabitTrackerRepo) UpdateHabit(habit *pb.Habit) (*pb.Status, error) {
 	arr = append(arr, habit.HabitId)
 	_, err := H.DB.Exec(query, arr...)
 	if err != nil {
-    return &pb.Status{Status: false}, err
-  }
-  return &pb.Status{Status: true}, nil
+		return &pb.Status{Status: false}, err
+	}
+	return &pb.Status{Status: true}, nil
+}
+func (H *HabitTrackerRepo)DeleteHabit(habitId *pb.HabitId)(*pb.Status,error){
+	_,err := H.DB.Exec("DELETE FROM Habits WHERE habit_id = $1",habitId.HabitId)
+	if err != nil{
+		return &pb.Status{
+			Status: false,
+		},err
+	}
+	return &pb.Status{
+		Status: true,
+	},err
 }
 
 
 func(H *HabitTrackerRepo) GetUserHabits(userId *pb.UserId)(*pb.UserHabits, error){
 	habits := []*pb.Habit{}
 	rows, err := H.DB.Query(`SELECT 
-								user_id, habit_id, name, discription, frequency createdAt
-							FROM 
-								Habits
-							WHERE 
+	user_id, habit_id, name, discription, frequency createdAt
+	FROM 
+	Habits
+	WHERE 
 								user_id = $1`, userId.UserId)
 	if err != nil{
 		return &pb.UserHabits{Habbits: habits}, err
@@ -110,19 +121,14 @@ func(H *HabitTrackerRepo) CreateHabitLog(habbitLog *pb.HabitLog)(*pb.Status, err
 	return &pb.Status{Status: true}, nil
 }
 
-func (H *HabitTrackerRepo)DeleteHabit(habitId *pb.HabitId)(*pb.Status,error){
-	_,err := H.DB.Exec("DELETE FROM Habits WHERE habit_id = $1",habitId.HabitId)
-	if err != nil{
-		return &pb.Status{
-			Status: false,
-		},err
-	}
-	return &pb.Status{
-		Status: true,
-	},err
+
+
+func(H *HabitTrackerRepo)GetHabitLogs(habitId *pb.HabitId)(*pb.HabitLog, error){
+	habitLog := &pb.HabitLog{}
+	err := H.DB.QueryRow(`SELECT habbit_id, logged_at, notes FROM habit_logs`).Scan(
+							&habitLog.HabitId, &habitLog.LoggedAt, &habitLog.Notes)
+	return habitLog, err
 }
-
-
 
 func (H *HabitTrackerRepo)GetHabitSuggestions(request *pb.Req)(*pb.Habits,error){
 	rows,err := H.DB.Query("SELECT * FROM Habit_logs")
@@ -140,11 +146,4 @@ func (H *HabitTrackerRepo)GetHabitSuggestions(request *pb.Req)(*pb.Habits,error)
 		habits.Habits = append(habits.Habits, &habitLog)
 	}
 	return &habits,nil
-}
-
-  func(H *HabitTrackerRepo) GetHabitLogs(habitId *pb.HabitId)(*pb.HabitLog, error){
-	habitLog := &pb.HabitLog{}
-	err := H.DB.QueryRow(`SELECT habbit_id, logged_at, notes FROM habit_logs`).Scan(
-							&habitLog.HabitId, &habitLog.LoggedAt, &habitLog.Notes)
-	return habitLog, err
 }
