@@ -82,7 +82,7 @@ func (H *HabitTrackerRepo) UpdateHabit(habit *pb.Habit) (*pb.Status, error) {
 
 func(H *HabitTrackerRepo) GetUserHabits(userId *pb.UserId)(*pb.UserHabits, error){
 	habits := []*pb.Habit{}
-	rows, err := H.Db.Query(`SELECT 
+	rows, err := H.DB.Query(`SELECT 
 								user_id, habit_id, name, discription, frequency createdAt
 							FROM 
 								Habits
@@ -93,7 +93,7 @@ func(H *HabitTrackerRepo) GetUserHabits(userId *pb.UserId)(*pb.UserHabits, error
 	}
 	for rows.Next(){
 		habit := &pb.Habit{}
-		err := rows.Scan(&habit.HabbitId, &habit.UserId, &habit.Name, &habit.Discription, &habit.Frequency, habit.CreatedAt)
+		err := rows.Scan(&habit.HabitId, &habit.UserId, &habit.Name, &habit.Discription, &habit.Frequency, habit.CreatedAt)
 		if err != nil{
 			return &pb.UserHabits{Habbits: habits}, err
 		}
@@ -103,7 +103,7 @@ func(H *HabitTrackerRepo) GetUserHabits(userId *pb.UserId)(*pb.UserHabits, error
 }
 
 func(H *HabitTrackerRepo) CreateHabitLog(habbitLog *pb.HabitLog)(*pb.Status, error){
-	_, err := H.Db.Exec(`INSERT INTO habit_logs(notes) VALUES($1)`, habbitLog.Notes)
+	_, err := H.DB.Exec(`INSERT INTO habit_logs(notes) VALUES($1)`, habbitLog.Notes)
 	if err != nil{
 		return &pb.Status{Status: false}, err
 	}
@@ -144,7 +144,7 @@ func (H *HabitTrackerRepo)GetHabitSuggestions(request *pb.Req)(*pb.Habits,error)
 
   func(H *HabitTrackerRepo) GetHabitLogs(habitId *pb.HabitId)(*pb.HabitLog, error){
 	habitLog := &pb.HabitLog{}
-	err := H.Db.QueryRow(`SELECT habbit_id, logged_at, notes FROM habit_logs`).Scan(
-							&habitLog.HabbitId, &habitLog.LoggedAt, &habitLog.Notes)
+	err := H.DB.QueryRow(`SELECT habbit_id, logged_at, notes FROM habit_logs`).Scan(
+							&habitLog.HabitId, &habitLog.LoggedAt, &habitLog.Notes)
 	return habitLog, err
 }

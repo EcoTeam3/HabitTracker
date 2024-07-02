@@ -7,7 +7,7 @@ import (
 )
 
 type Server struct {
-	pb.UnimplementedHabbitTrackerServer
+	pb.UnimplementedHabitTrackerServer
 	H postgres.HabitTrackerRepo
 }
 
@@ -47,7 +47,7 @@ func (S *Server) DeleteHabit(ctx context.Context, habitId *pb.HabitId) (*pb.Stat
 	return status, nil
 }
 
-func (S *Server) GetUserHabits(ctx context.Context, userID *pb.UserId) (*pb.Habit, error) {
+func (S *Server) GetUserHabits(ctx context.Context, userID *pb.UserId) (*pb.UserHabits, error) {
 	habit, err := S.H.GetUserHabits(userID)
 	if err != nil {
 		return nil, err
