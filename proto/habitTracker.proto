@@ -11,7 +11,7 @@ service HabitTracker{
     rpc GetHabit(HabitId) returns(Habit){}
     rpc UpdateHabit(Habit) returns(Status){}
     rpc DeleteHabit(HabitId) returns(Status){}
-    rpc GetUserHabits(UserId) returns(Habit){}
+    rpc GetUserHabits(UserId) returns(UserHabits){}
     rpc CreateHabitLog(HabitLog) returns(Status){}
     rpc GetHabitLogs(HabitId) returns(HabitLog){}
     rpc GetHabitSuggestions(Req) returns(Habits){}
