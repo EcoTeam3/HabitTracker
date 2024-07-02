@@ -30,6 +30,6 @@ func main(){
 
 	s := service.NewHabitTracker(*postgres.NewHabitTrackerRepo(db))
 	server := grpc.NewServer()
-	pb.RegisterHabitTrackerServer(server,s)
+	pb.RegisterHabitTrackerServer(server, s)
 	
 }

@@ -37,7 +37,7 @@ type HabitTrackerClient interface {
 	GetHabit(ctx context.Context, in *HabitId, opts ...grpc.CallOption) (*Habit, error)
 	UpdateHabit(ctx context.Context, in *Habit, opts ...grpc.CallOption) (*Status, error)
 	DeleteHabit(ctx context.Context, in *HabitId, opts ...grpc.CallOption) (*Status, error)
-	GetUserHabits(ctx context.Context, in *UserId, opts ...grpc.CallOption) (*Habit, error)
+	GetUserHabits(ctx context.Context, in *UserId, opts ...grpc.CallOption) (*UserHabits, error)
 	CreateHabitLog(ctx context.Context, in *HabitLog, opts ...grpc.CallOption) (*Status, error)
 	GetHabitLogs(ctx context.Context, in *HabitId, opts ...grpc.CallOption) (*HabitLog, error)
 	GetHabitSuggestions(ctx context.Context, in *Req, opts ...grpc.CallOption) (*Habits, error)
@@ -91,9 +91,9 @@ func (c *habitTrackerClient) DeleteHabit(ctx context.Context, in *HabitId, opts 
 	return out, nil
 }
 
-func (c *habitTrackerClient) GetUserHabits(ctx context.Context, in *UserId, opts ...grpc.CallOption) (*Habit, error) {
+func (c *habitTrackerClient) GetUserHabits(ctx context.Context, in *UserId, opts ...grpc.CallOption) (*UserHabits, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Habit)
+	out := new(UserHabits)
 	err := c.cc.Invoke(ctx, HabitTracker_GetUserHabits_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -139,7 +139,7 @@ type HabitTrackerServer interface {
 	GetHabit(context.Context, *HabitId) (*Habit, error)
 	UpdateHabit(context.Context, *Habit) (*Status, error)
 	DeleteHabit(context.Context, *HabitId) (*Status, error)
-	GetUserHabits(context.Context, *UserId) (*Habit, error)
+	GetUserHabits(context.Context, *UserId) (*UserHabits, error)
 	CreateHabitLog(context.Context, *HabitLog) (*Status, error)
 	GetHabitLogs(context.Context, *HabitId) (*HabitLog, error)
 	GetHabitSuggestions(context.Context, *Req) (*Habits, error)
@@ -162,7 +162,7 @@ func (UnimplementedHabitTrackerServer) UpdateHabit(context.Context, *Habit) (*St
 func (UnimplementedHabitTrackerServer) DeleteHabit(context.Context, *HabitId) (*Status, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteHabit not implemented")
 }
-func (UnimplementedHabitTrackerServer) GetUserHabits(context.Context, *UserId) (*Habit, error) {
+func (UnimplementedHabitTrackerServer) GetUserHabits(context.Context, *UserId) (*UserHabits, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserHabits not implemented")
 }
 func (UnimplementedHabitTrackerServer) CreateHabitLog(context.Context, *HabitLog) (*Status, error) {
