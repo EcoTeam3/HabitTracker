@@ -3,7 +3,7 @@ package postgres
 import (
 	"database/sql"
 	"fmt"
-	pb "mymode/generated"
+	pb "mymode/generated/habit"
 	"strconv"
 	"strings"
 	"time"
