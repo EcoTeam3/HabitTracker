@@ -2,7 +2,7 @@ package service
 
 import (
 	"context"
-	pb "mymode/generated"
+	pb "mymode/generated/habit"
 	"mymode/storage/postgres"
 )
 

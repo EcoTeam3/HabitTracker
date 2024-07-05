@@ -7,7 +7,7 @@ import (
 	"mymode/storage/postgres"
 	"net"
 	"google.golang.org/grpc"
-	pb "mymode/generated"
+	pb "mymode/generated/habit"
 )
 
 
